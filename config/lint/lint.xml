@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="AndroidGradlePluginVersion" severity="informational" />
+    <issue id="GradleDependency" severity="informational" />
+    <issue id="InvalidPackage">
+        <ignore path="**/allure-kotlin-commons-*.jar" />
+    </issue>
+    <issue id="NewerVersionAvailable" severity="informational" />
+    <issue id="WrongThreadInterprocedural" severity="warning" />
+</lint>

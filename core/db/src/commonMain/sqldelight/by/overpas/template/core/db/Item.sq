@@ -1,0 +1,10 @@
+CREATE TABLE Item (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+selectAllNames:
+SELECT name FROM Item ORDER BY id;
+
+insert:
+INSERT INTO Item(name) VALUES (?);

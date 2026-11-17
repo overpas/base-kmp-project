@@ -1,0 +1,28 @@
+{
+  "name": "mauth",
+  "owner": {
+    "name": "mauth"
+  },
+  "description": "External skills that the mauth agent guidelines require, pinned to exact commits.",
+  "plugins": [
+    {
+      "name": "chrisbanes-skills",
+      "description": "Kotlin, Android and Jetpack Compose skills by Chris Banes.",
+      "source": {
+        "source": "github",
+        "repo": "chrisbanes/skills",
+        "sha": "fec6823e4dd0bcf82c2fe77896bc81d44c29200b"
+      }
+    },
+    {
+      "name": "testing-on-the-toilet",
+      "description": "Google Testing on the Toilet rules for writing and reviewing tests.",
+      "source": {
+        "source": "github",
+        "repo": "shamashel/testing-on-the-toilet",
+        "sha": "83df704ad7afafc6bcb2fa0345a813a9f702f738"
+      },
+      "skills": ["./skills/testing-on-the-toilet"]
+    }
+  ]
+}
