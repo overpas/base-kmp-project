@@ -32,12 +32,12 @@
     "baseRef": "head"
   },
   "enabledPlugins": {
-    "chrisbanes-skills@mauth": true,
-    "testing-on-the-toilet@mauth": true,
-    "ponytail@ponytail": true
+    "chrisbanes-skills@template": true,
+    "testing-on-the-toilet@template": true,
+    "ponytail@template": true
   },
   "extraKnownMarketplaces": {
-    "mauth": {
+    "template": {
       "source": {
         "source": "directory",
         "path": "."
