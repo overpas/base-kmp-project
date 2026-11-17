@@ -154,6 +154,8 @@ class BashTests(unittest.TestCase):
                 "touch .agents/skills/x/SKILL.md",
                 "dd if=/dev/null of=AGENTS.md",
                 "python3 -c \"open('AGENTS.md', 'w').write('x')\"",
+                "python3 -Ic \"open('AGENTS.md', 'w').write('x')\"",
+                "node -e \"require('fs').writeFileSync('CLAUDE.md', 'x')\"",
                 "git checkout -- AGENTS.md",
                 "git -C . rm .claude/agents/demo.md",
                 "git apply fix.patch",
@@ -178,6 +180,7 @@ class BashTests(unittest.TestCase):
                 "echo x > build/out.txt 2>&1",
                 "rm -rf .claude/worktrees/x",
                 "python3 -m unittest scripts/tests/test_guidelines_guard.py",
+                "python3 .claude/skills/tool/run.py run --scope targeted --workflow abc -- ./gradlew detekt --continue",
             ]
 
             results = {command: _guard(_bash(command, root)) for command in commands}

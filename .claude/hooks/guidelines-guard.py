@@ -206,7 +206,7 @@ def segment_target(segment, resolver):
         return next((argument for argument in destinations if resolver.protected(argument)), None)
     if name in WRITERS or (name in IN_PLACE and any(argument.startswith("-") and not argument.startswith("--") and "i" in argument or argument.startswith("--in-place") for argument in arguments)):
         return next((argument for argument in path_arguments(arguments) if resolver.protected(argument)), None)
-    if name in INTERPRETERS and any(argument in ("-c", "-e") or argument.startswith("-") and argument[-1] in "ce" for argument in arguments):
+    if name in INTERPRETERS and any(argument.startswith("-") and not argument.startswith("--") and argument[-1] in "ce" for argument in arguments):
         return next((argument for argument in arguments if mentions_marker(argument)), None)
     if name == "git":
         subcommand, rest = git_subcommand(arguments)

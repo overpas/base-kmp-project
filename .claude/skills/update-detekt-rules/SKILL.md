@@ -78,4 +78,5 @@ for each of them in the config.
 
 ## IntelliJ inspection rules
 
-The `intellij-*` rule sets come from Maven. Just update the version.
+The `intellij-*` rule sets come from Maven. Just update the `intellij-inspections` version in
+`gradle/libs.versions.toml`.

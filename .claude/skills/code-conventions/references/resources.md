@@ -5,7 +5,7 @@ follows [compose-multiplatform-resources](https://kotlinlang.org/docs/multiplatf
 
 ## Strings
 
-Strings live in `core/strings/src/commonMain/composeResources/values/strings.xml` in `:core:string`
+Strings live in `core/strings/src/commonMain/composeResources/values/strings.xml` in `:core:strings`
 module.
 
 Group entries in `strings.xml` by feature under a `<!-- Feature name -->` comment, in the
@@ -17,6 +17,7 @@ as the UI that applies them,
 and stay public so end-to-end tests can address nodes without repeating the literals.
 
 Gradle's `api()` and `export()` can be used for tags that need to be exported to the iOS
+framework, so the Swift end-to-end tests can address the same nodes.
 
 ### Strings naming
 
@@ -24,8 +25,8 @@ Three underscore-separated parts: **feature** + **UI element** + **text type/pur
 
 ```
 main_menu_add_button_label
-add_manual_additional_properties_title
-add_manual_type_hotp_label
+note_editor_title_field_label
+settings_theme_dark_label
 user_profile_general_info_title
 transactions_header_description
 ```

@@ -26,4 +26,4 @@ The rules any work on this project must abide by.
 
 - The references name skills as `/<plugin>:<skill>`. They come from the plugins in
   `.claude-plugin/marketplace.json`. When one does not load, stop the work and tell the user to run
-  `claude plugin install <plugin>@mauth --scope project` and start a new session.
+  `claude plugin install <plugin>@template --scope project` and start a new session.

@@ -1,6 +1,7 @@
 package by.overpas.template.e2e
 
 import androidx.compose.ui.test.ExperimentalTestApi
+import by.overpas.template.EscapeAsBackPage
 import by.overpas.template.core.ui.test.runE2eTest
 import by.overpas.template.core.ui.test.step
 import by.overpas.template.feature.greeting.ui.GreetingPage

@@ -1,9 +1,9 @@
 {
-  "name": "mauth",
+  "name": "template",
   "owner": {
-    "name": "mauth"
+    "name": "template"
   },
-  "description": "External skills that the mauth agent guidelines require, pinned to exact commits.",
+  "description": "External skills that the agent guidelines require, pinned to exact commits.",
   "plugins": [
     {
       "name": "chrisbanes-skills",
@@ -23,6 +23,15 @@
         "sha": "83df704ad7afafc6bcb2fa0345a813a9f702f738"
       },
       "skills": ["./skills/testing-on-the-toilet"]
+    },
+    {
+      "name": "ponytail",
+      "description": "Code review for the simplest solution that works.",
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail",
+        "sha": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846"
+      }
     }
   ]
 }
