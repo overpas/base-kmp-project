@@ -31,6 +31,7 @@ allure = "2.35.5"
 kover = "0.9.9"
 detekt = "2.0.0-alpha.6"
 compose-rules = "0.6.6"
+intellij-inspections = "0.4.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -85,6 +86,11 @@ allure-java-commons = { module = "io.qameta.allure:allure-java-commons", version
 allure-junit5 = { module = "io.qameta.allure:allure-junit5", version.ref = "allure" }
 detekt-compose-rules = { module = "io.nlopez.compose.rules:detekt", version.ref = "compose-rules" }
 detekt-ktlint-wrapper = { module = "dev.detekt:detekt-rules-ktlint-wrapper", version.ref = "detekt" }
+detekt-intellij-inspections-android-all = { module = "io.github.overpas:intellij-inspections-android-all", version.ref = "intellij-inspections" }
+detekt-intellij-inspections-compose-multiplatform-preview = { module = "io.github.overpas:intellij-inspections-compose-multiplatform-preview", version.ref = "intellij-inspections" }
+detekt-intellij-inspections-gradle-best-practices = { module = "io.github.overpas:intellij-inspections-gradle-best-practices", version.ref = "intellij-inspections" }
+detekt-intellij-inspections-jvm-all = { module = "io.github.overpas:intellij-inspections-jvm-all", version.ref = "intellij-inspections" }
+detekt-intellij-inspections-kotlin-all = { module = "io.github.overpas:intellij-inspections-kotlin-all", version.ref = "intellij-inspections" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

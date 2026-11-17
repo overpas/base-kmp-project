@@ -23,6 +23,11 @@ dependencies {
     detektPlugins(fileTree(rootProject.layout.projectDirectory.dir("config/detekt/plugins")) { include("*.jar") })
 
     detektPlugins(libs.detekt.compose.rules)
+    detektPlugins(libs.detekt.intellij.inspections.android.all)
+    detektPlugins(libs.detekt.intellij.inspections.compose.multiplatform.preview)
+    detektPlugins(libs.detekt.intellij.inspections.gradle.best.practices)
+    detektPlugins(libs.detekt.intellij.inspections.jvm.all)
+    detektPlugins(libs.detekt.intellij.inspections.kotlin.all)
     detektPlugins(libs.detekt.ktlint.wrapper)
 }
 
