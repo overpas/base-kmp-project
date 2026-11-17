@@ -2,6 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     id("code-coverage")
+    id("java-test-fixtures")
     id("static-analysis")
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
@@ -23,6 +24,12 @@ dependencies {
     implementation(libs.essenty.back.handler)
     implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.kotlinx.serialization.json)
+
+    testFixturesImplementation(libs.essenty.back.handler)
+    testFixturesImplementation(project.dependencies.compose.desktop.currentOs)
+
+    testFixturesImplementation(libs.compose.ui.test)
+    testFixturesImplementation(libs.ultron.compose)
 }
 
 testing {
@@ -31,7 +38,14 @@ testing {
             useJUnitJupiter(libs.versions.junit.jupiter)
 
             dependencies {
+                implementation(projects.core.uiTest)
+
+                implementation(libs.essenty.back.handler)
+                implementation(project.dependencies.compose.desktop.currentOs)
+
+                implementation(libs.compose.ui.test)
                 implementation(libs.kotlin.test)
+                implementation(libs.ultron.compose)
             }
         }
 
@@ -51,6 +65,7 @@ testing {
                 implementation(libs.essenty.lifecycle)
                 implementation(libs.kotlinx.coroutines.swing)
                 implementation(project.dependencies.compose.desktop.currentOs)
+                implementation(testFixtures(project()))
 
                 implementation(libs.compose.ui.test)
                 implementation(libs.ultron.compose)
