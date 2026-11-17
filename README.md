@@ -71,5 +71,7 @@ python3 -m unittest discover -s scripts/tests   # the scripts and hooks themselv
 ```
 
 The end-to-end scripts need [Allure](https://allurereport.org/docs/install/), and the Android SDK
-or Xcode. GitHub Actions runs static analysis, the unit and UI tests, coverage and the script tests
-on every pull request; it does not run the end-to-end tests.
+or Xcode. GitHub Actions runs all of these on every pull request, in parallel jobs: the iOS work on
+macOS runners, the rest on Linux runners. Each end-to-end job keeps its Allure report as an
+artifact. The `CI passed` job fails when one of the other jobs fails, so it can be the one
+required check.

@@ -1,0 +1,11 @@
+name: Set up the build
+description: Installs the JDK and Gradle with caching
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v6
+      with:
+        distribution: corretto
+        java-version: "21"
+    - uses: gradle/actions/setup-gradle@v6

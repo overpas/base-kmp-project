@@ -1,0 +1,11 @@
+name: Set up Kotlin/Native
+description: Restores and saves the Kotlin/Native toolchain and dependencies
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v6
+      with:
+        path: ~/.konan
+        key: konan-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('gradle/libs.versions.toml') }}
+        restore-keys: konan-${{ runner.os }}-${{ runner.arch }}-
