@@ -41,13 +41,13 @@ own, so nothing needs to be passed in. The single exception is `setContent`, dec
 `ComposeUiTest` extension inside the object:
 
 ```kotlin
-object AccountsPage {
+object NotesPage {
 
-    private val addButton = hasTestTag(AccountsTags.ADD_BUTTON)
+    private val addButton = hasTestTag(NotesTags.ADD_BUTTON)
 
     @OptIn(ExperimentalTestApi::class)
-    fun ComposeUiTest.setContent(component: AccountsComponent) = setContent {
-        AccountsUi(component = component, modifier = Modifier.fillMaxSize())
+    fun ComposeUiTest.setContent(component: NotesComponent) = setContent {
+        NotesUi(component = component, modifier = Modifier.fillMaxSize())
     }
 
     fun clickAddButton() {
@@ -65,11 +65,10 @@ An iOS end-to-end test mirrors its Android end-to-end test: the same scenario ag
 with the same step names. A test that needs the back camera has no iOS counterpart, because the iOS
 simulator has no camera.
 
-A desktop end-to-end test mirrors its Android end-to-end test in the same way. Desktop has no camera,
-so the Add button opens a menu with "Enter manually" and "Choose QR image", and a test that needs the
-camera, the import flow or the system picker has no desktop counterpart. Each desktop test runs the
-real app offscreen on an empty JUnit `@TempDir` data directory, so it never touches the user's desktop
-data.
+A desktop end-to-end test mirrors its Android end-to-end test in the same way. A test that needs the
+camera, system back or the system picker has no desktop counterpart, and Escape is the desktop back
+key. Each desktop test runs the real app offscreen on an empty JUnit `@TempDir` data directory, so
+it never touches the user's desktop data.
 
 Name each phase of a test with `step("…") { }` from `:core:ui-test` on Android and desktop and from the XCUITest
 `step` shim on iOS, not Ultron's: only they attach the end-of-phase screenshot to the report. End
@@ -77,12 +76,13 @@ each action step with an assertion that waits for the action's visible result, s
 screen, menu or dialog: the app reacts on background dispatchers that neither Compose idling nor
 XCUITest waits for, so a step without it can end, and be shot, too early.
 
-Mock the back camera image of an Android e2e test with the `BackCameraImage` rule, or with
-`BackCamera.show` inside a step.
+If the project keeps `:core:ui-test:camera`, mock the back camera image of an Android e2e test with
+the `BackCameraImage` rule, or with `BackCamera.show` inside a step.
 
-Supply the image a test picks from the gallery with the `GalleryImage` rule and pick it with
-`PhotoPicker.pickNewestImage()` on Android (`:core:ui-test:gallery`), and with `GalleryImage.add`,
-`GalleryImage.remove` and `PhotoPicker.pickNewestImage()` from `iosApp/UITestSupport/` on iOS.
+If the project keeps `:core:ui-test:gallery`, supply the image a test picks from the gallery with the
+`GalleryImage` rule and pick it with `PhotoPicker.pickNewestImage()` on Android, and with
+`GalleryImage.add`, `GalleryImage.remove` and `PhotoPicker.pickNewestImage()` from
+`iosApp/UITestSupport/` on iOS.
 
 To run the e2e scripts for another app in the repository, add a thin wrapper that sets the app's
 directory and IDs, not a copy of the script.
@@ -93,8 +93,7 @@ Use `` `backticked names with spaces` `` freely — except in `src/uiTest/`,
 `androidApp/src/androidTest/` and `desktopApp/src/e2eTest/`, where methods must be camelCase.
 
 A Swift test method carries the `test` prefix XCTest discovers it by, and keeps the Kotlin name
-after it: `accountCodeIsDisplayedAfterAccountIsAddedManually` becomes
-`testAccountCodeIsDisplayedAfterAccountIsAddedManually`.
+after it: `noteIsDisplayedAfterItIsSaved` becomes `testNoteIsDisplayedAfterItIsSaved`.
 
 ## Ultron drives every UI interaction
 
@@ -103,7 +102,7 @@ UI tests and page objects use [Ultron](https://open-tool.github.io/ultron/)
 `SemanticsMatcher` — `hasTestTag(SomeTags.FIELD)` — and every operation hangs straight off it:
 
 ```kotlin
-private val saveButton = hasTestTag(AddManualTags.SAVE_BUTTON)
+private val saveButton = hasTestTag(NoteEditorTags.SAVE_BUTTON)
 
 fun clickSave() {
     saveButton.click()

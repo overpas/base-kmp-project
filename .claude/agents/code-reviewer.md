@@ -44,9 +44,9 @@ finding sends the feature back to the coder.
    baseline, or a change to the analysis, coverage or gate configuration; work that a commit claims
    but does not contain; guideline documents amendments to make unacceptable results acceptable.
    Each one is blocking.
-6. ** Redundancy.** If every created file or edit is really necessary and if you can safely delete/undo
+6. **Redundancy.** If every created file or edit is really necessary and if you can safely delete/undo
    things without influencing the end result.
-7. ** Potential user nitpicks.** What the user might not like about the solution, what things would
+7. **Potential user nitpicks.** What the user might not like about the solution, what things would
    stand out to them as out of place.
 
 ## Output

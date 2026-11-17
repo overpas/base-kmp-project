@@ -63,7 +63,7 @@ const REVIEW = {
         type: 'object',
         required: ['standpoint', 'severity', 'problem', 'change'],
         properties: {
-          standpoint: { type: 'string', enum: ['intent', 'conventions', 'bugs', 'style', 'cheating'] },
+          standpoint: { type: 'string', enum: ['intent', 'conventions', 'bugs', 'style', 'cheating', 'redundancy', 'nitpicks'] },
           severity: { type: 'string', enum: ['blocking', 'nit'] },
           file: { type: 'string' },
           line: { type: 'integer' },

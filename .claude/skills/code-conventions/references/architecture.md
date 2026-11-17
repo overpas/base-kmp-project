@@ -4,22 +4,22 @@ This is a **Kotlin Multiplatform** project with **Compose Multiplatform** for sh
 Android, iOS, and Desktop.
 
 ```
-mauth/
+<project>/
 ├── shared/                      # app shell: App(), root navigation (Decompose), root DI graph
 ├── core/                        # reusable libraries
 │   ├── arch/                    # UDF primitives: handler types, executor, main-thread state scope
-│   ├── db/                      # DB: SQLite schema, drivers, entry store
+│   ├── db/                      # optional: SQLite schema and drivers through SQLDelight
 │   ├── design/                  # design system: themes, typography, icons, reusable UI components
-│   ├── otp/                     # HOTP and TOTP generation, Secret, Base32 decoding
 │   ├── platform/                # current platform and per-target services
-│   ├── qr-image/                # system image picker and QR reader for a still image
 │   ├── strings/                 # all user-visible strings as Compose resources
 │   ├── system/                  # current time provider, replaceable in tests
 │   ├── test/                    # unit-test helpers: assertions, flow collection
 │   ├── ui-test/                 # Compose UI test base, Ultron config, matchers, e2e entry point
+│   │   ├── camera/              # optional: emulator back camera image for Android e2e tests
+│   │   └── gallery/             # optional: gallery images and the system photo picker in e2e tests
 │   └── ...
 │
-├── feature/                     # one module per feature: accounts, add/manual
+├── feature/                     # one module per feature, one screen or flow each
 │   └── <feature>/               # the feature and its UI
 │       ├── tags/                # test tags, exported to the iOS framework
 │       └── ui-test/             # page objects of the feature

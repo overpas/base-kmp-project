@@ -5,7 +5,7 @@ description: Use on late stages of coding or code-review when you think the work
 
 # What do you think I will have problems with
 
-Now that you are done or almost done, look back at the code and give think of top 1-4 pieces of code
+Now that you are done or almost done, look back at the code and think of the top 1-4 pieces of code
 I'm most likely to consider problematic style-wise, architecture-wise, conventions-wise.
 
 # Output format
