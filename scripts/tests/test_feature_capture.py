@@ -105,7 +105,7 @@ class StepShotTests(unittest.TestCase):
             (exported / "late.png").write_bytes(b"late")
             (exported / "early.jpeg").write_bytes(b"early")
             (exported / "manifest.json").write_text(json.dumps([{
-                "testIdentifier": "AddOtpEntryE2eTest/testOtpCodeIsDisplayedAfterEntryIsAddedManually()",
+                "testIdentifier": "GreetingE2eTest/testGreetingShowsTheEnteredNameAndGoesBack()",
                 "attachments": [
                     {"exportedFileName": "late.png", "suggestedHumanReadableName": "Click Save button_0_0F6E2C1A-7B7D-4E43-9A7B-2B5C3E9D1A11.png", "timestamp": 20.0},
                     {"exportedFileName": "early.jpeg", "suggestedHumanReadableName": "Click Add button_0_9A1D3E5C-2B7B-4E43-9A7B-7D1A0F6E2C1A.jpeg", "timestamp": 10.0},
@@ -161,7 +161,7 @@ class AndroidCaptureTests(unittest.TestCase):
             out.mkdir()
 
             with mock.patch.object(capture, "EMULATOR_SCRIPT", script):
-                result = capture.capture_android(base / "project", "by.overpas.template.e2e.ScanTest", out, "after", {"PATH": f"{base / 'bin'}:/bin:/usr/bin"})
+                result = capture.capture_android(base / "project", "by.overpas.template.e2e.GreetingE2eTest", out, "after", {"PATH": f"{base / 'bin'}:/bin:/usr/bin"})
 
             self.assertEqual((0, None, [], {}), result)
             self.assertEqual(["start", "e2e serial=emulator-5584 lock=1", "stop"], order.read_text(encoding="utf-8").splitlines())

@@ -8,6 +8,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_DIR="${APP_DIR:-.}"
 BUNDLE_ID="${BUNDLE_ID:-by.overpas.template.template}"
 PROJECT_DIR="$ROOT_DIR/$APP_DIR"
+GALLERY_SCHEME="$PROJECT_DIR/iosApp/iosApp.xcodeproj/xcshareddata/xcschemes/GalleryTestHostUITests.xcscheme"
 RESULTS_DIR="$PROJECT_DIR/.allure/ios/results"
 REPORTS_DIR="$PROJECT_DIR/.allure/ios/reports"
 
@@ -37,7 +38,7 @@ xcodebuild test \
     "$@"
 status=$?
 
-if [[ "$APP_DIR" == "." ]]; then
+if [[ "$APP_DIR" == "." && -f "$GALLERY_SCHEME" ]]; then
     xcodebuild test \
         -project "$PROJECT_DIR/iosApp/iosApp.xcodeproj" \
         -scheme GalleryTestHostUITests \

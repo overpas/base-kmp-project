@@ -29,12 +29,12 @@ console.log(JSON.stringify({ result, calls }))
 
 def _args(**overrides):
     value = {
-        "slug": "otp-search",
-        "branch": "otp-search",
-        "featureDir": "docs/features/otp-search",
+        "slug": "note-search",
+        "branch": "note-search",
+        "featureDir": "docs/features/note-search",
         "baseSha": _BASE,
         "plan": "1. Add the search field.",
-        "artifacts": {"businessSpec": "docs/features/otp-search/business-spec.md"},
+        "artifacts": {"businessSpec": "docs/features/note-search/business-spec.md"},
         "gates": ["detekt", "integrity", "unit"],
         "allowProtected": [],
         "ui": "added",
@@ -73,7 +73,7 @@ def _review(*severities):
 
 
 def _demo():
-    return {"path": "/repo/.demos/otp-search/index.html", "media": ["after-search.mp4"], "highlights": ["Search"], "problems": []}
+    return {"path": "/repo/.demos/note-search/index.html", "media": ["after-search.mp4"], "highlights": ["Search"], "problems": []}
 
 
 def _run(args, responses):
@@ -108,7 +108,7 @@ class FeatureBuildTests(unittest.TestCase):
 
         self.assertEqual(
             "Start command:\n"
-            f"git show {_BASE}:scripts/feature-factory/gates.py | python3 - start --base {_BASE} --slug otp-search --run r1a1 "
+            f"git show {_BASE}:scripts/feature-factory/gates.py | python3 - start --base {_BASE} --slug note-search --run r1a1 "
             "--allow 'config/detekt/**' integrity detekt unit",
             calls[1]["prompt"],
         )

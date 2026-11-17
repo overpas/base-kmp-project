@@ -55,7 +55,7 @@ class CoderGuardTests(unittest.TestCase):
             targets = [
                 root / ".claude/agents/code-reviewer.md",
                 root / "scripts/feature-factory/gates.py",
-                root / "docs/decisions/0001-use-sqlcipher.md",
+                root / "docs/decisions/0001-use-sqldelight.md",
                 root / "docs/features/search/business-spec.md",
                 root / "docs/features/search/tech-design.md",
             ]
@@ -103,7 +103,7 @@ class CoderGuardTests(unittest.TestCase):
             "git checkout -- feature/src/commonMain/kotlin/Feature.kt",
             "git checkout HEAD~1 -- feature/src/commonMain/kotlin/Feature.kt",
             "git log --oneline develop..HEAD",
-            "./gradlew :feature:otp:jvmTest",
+            "./gradlew :feature:notes:jvmTest",
         ]
 
         results = [_guard("coder", _bash(command)) for command in commands]
@@ -155,9 +155,9 @@ class VerifierGuardTests(unittest.TestCase):
 
     def test_gate_runner_commands_are_allowed(self):
         commands = [
-            "git show 4fef045:scripts/feature-factory/gates.py | python3 - start --base 4fef045 --slug otp-search --run r1a1 integrity detekt unit",
-            "git show 4fef045:scripts/feature-factory/gates.py | python3 - start --base 4fef045 --slug otp-search --run r2a3 --allow 'config/detekt/**' integrity",
-            "python3 build/feature-factory/otp-search/r1a1/gates.py wait",
+            "git show 4fef045:scripts/feature-factory/gates.py | python3 - start --base 4fef045 --slug note-search --run r1a1 integrity detekt unit",
+            "git show 4fef045:scripts/feature-factory/gates.py | python3 - start --base 4fef045 --slug note-search --run r2a3 --allow 'config/detekt/**' integrity",
+            "python3 build/feature-factory/note-search/r1a1/gates.py wait",
         ]
 
         results = [_guard("verifier", _bash(command)) for command in commands]
@@ -167,7 +167,7 @@ class VerifierGuardTests(unittest.TestCase):
     def test_other_commands_are_denied(self):
         commands = [
             "ls",
-            "python3 build/feature-factory/otp-search/r1a1/gates.py wait; rm -rf build",
+            "python3 build/feature-factory/note-search/r1a1/gates.py wait; rm -rf build",
             "git show 4fef045:scripts/feature-factory/gates.py | python3 - start --slug x $(touch y)",
             "./gradlew detekt",
         ]

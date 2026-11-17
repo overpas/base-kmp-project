@@ -47,6 +47,9 @@ class _Harness:
         (self.root / "scripts").mkdir(parents=True)
         for script in ("ios-e2e.sh", "device-lock.sh"):
             shutil.copy2(_ROOT / "scripts" / script, self.root / "scripts")
+        self.gallery_scheme = self.root / "iosApp/iosApp.xcodeproj/xcshareddata/xcschemes/GalleryTestHostUITests.xcscheme"
+        self.gallery_scheme.parent.mkdir(parents=True)
+        self.gallery_scheme.write_text("<Scheme/>", encoding="utf-8")
         _executable(self.bin / "xcrun", _XCRUN)
         for tool in ("xcodebuild", "open", "allure"):
             _executable(self.bin / tool, _LOGGER)
@@ -120,8 +123,18 @@ class GalleryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             harness = _Harness(directory)
 
-            harness.run(APP_DIR="sample", BUNDLE_ID="by.overpas.notes")
+            harness.run(APP_DIR="sample", BUNDLE_ID="com.example.sample")
 
+            self.assertNotIn("GalleryTestHostUITests", " ".join(harness.calls()))
+
+    def test_runs_no_gallery_tests_when_the_gallery_scheme_is_removed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            harness = _Harness(directory)
+            harness.gallery_scheme.unlink()
+
+            completed = harness.run()
+
+            self.assertEqual(0, completed.returncode, completed.stderr)
             self.assertNotIn("GalleryTestHostUITests", " ".join(harness.calls()))
 
 

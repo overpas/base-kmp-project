@@ -102,6 +102,7 @@ class _Harness:
         relay = "core/ui-test/camera/scripts/camera-relay.sh"
         (self.root / relay).parent.mkdir(parents=True)
         shutil.copy2(_ROOT / relay, self.root / relay)
+        (self.root / "core/ui-test/gallery").mkdir(parents=True)
         _executable(self.root / "gradlew", _GRADLEW)
         _executable(self.bin / "allure", "#!/bin/sh\nexit 0\n")
         _executable(self.bin / "xcrun", "#!/bin/sh\nexit 0\n")
@@ -112,6 +113,9 @@ class _Harness:
         (self.root / "local.properties").write_text(f"sdk.dir={self.sdk}\n", encoding="utf-8")
         self.add_system_image()
         self.add_camera_image("androidApp/src/androidTest/camera/back.png")
+
+    def remove(self, relative):
+        shutil.rmtree(self.root / relative)
 
     def add_system_image(self):
         image = self.sdk / _SYSTEM_IMAGE / "system.img"
@@ -265,7 +269,7 @@ class ManagedEmulatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             harness = _Harness(directory)
 
-            completed = harness.run(APP_DIR="sample", APP_ID="by.overpas.notes")
+            completed = harness.run(APP_DIR="sample", APP_ID="com.example.sample")
 
             self.assertEqual(0, completed.returncode, completed.stderr)
             self.assertNotIn("-camera-back", harness.text("emulator-arguments"))
@@ -333,7 +337,7 @@ class ManagedEmulatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             harness = _Harness(directory)
 
-            harness.run(APP_DIR="sample", APP_ID="by.overpas.notes")
+            harness.run(APP_DIR="sample", APP_ID="com.example.sample")
 
             commands = [line.split("|", 1)[1] for line in harness.lines("adb.log")]
             self.assertNotIn("emu avd grpc", commands)
@@ -342,9 +346,44 @@ class ManagedEmulatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             harness = _Harness(directory)
 
-            harness.run(APP_DIR="sample", APP_ID="by.overpas.notes")
+            harness.run(APP_DIR="sample", APP_ID="com.example.sample")
 
             self.assertEqual([":sample:androidApp:connectedAndroidTest"], harness.lines("gradle.log"))
+
+    def test_runs_no_camera_steps_when_the_camera_module_is_removed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            harness = _Harness(directory)
+            harness.remove("core/ui-test/camera")
+            (harness.state / "discovery.ini").write_text("grpc.port=8584\ngrpc.token=secret-token\n", encoding="utf-8")
+
+            completed = harness.run(FAKE_GRPC="1")
+
+            commands = [line.split("|", 1)[1] for line in harness.lines("adb.log")]
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertNotIn("emu avd grpc", commands)
+            self.assertEqual(
+                [
+                    ":androidApp:connectedAndroidTest",
+                    ":core:ui-test:gallery:connectedAndroidDeviceTest",
+                ],
+                harness.lines("gradle.log"),
+            )
+
+    def test_runs_no_gallery_tests_when_the_gallery_module_is_removed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            harness = _Harness(directory)
+            harness.remove("core/ui-test/gallery")
+
+            completed = harness.run()
+
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertEqual(
+                [
+                    ":androidApp:connectedAndroidTest",
+                    ":core:ui-test:camera:connectedAndroidDeviceTest",
+                ],
+                harness.lines("gradle.log"),
+            )
 
     def test_fails_without_the_tests_when_the_given_camera_image_does_not_exist(self):
         with tempfile.TemporaryDirectory() as directory:
