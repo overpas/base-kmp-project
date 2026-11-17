@@ -28,9 +28,7 @@
 ## Setup
 
 - The external skills are plugins from `.claude-plugin/marketplace.json`, pinned to commits. On a
-  new machine trust the folder, then run
-  `claude plugin install chrisbanes-skills@mauth --scope project` and
-  `claude plugin install testing-on-the-toilet@mauth --scope project` once.
+  new machine trust the folder, then run `claude plugin install <skill> --scope project` for each.
 
 ## Git
 
