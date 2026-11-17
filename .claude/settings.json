@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git rm *)",
+      "Bash(git mv *)",
+      "Bash(git worktree add build/feature-factory/*)",
+      "Bash(git worktree remove --force build/feature-factory/*)",
+      "Bash(python3 scripts/feature-factory/*)",
+      "Bash(adb *)",
+      "Bash(xcrun simctl *)",
+      "Bash(ffmpeg *)",
+      "Workflow(feature-build)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guidelines-guard.py\""
+          }
+        ]
+      }
+    ]
+  },
+  "worktree": {
+    "baseRef": "head"
+  },
+  "enabledPlugins": {
+    "chrisbanes-skills@mauth": true,
+    "testing-on-the-toilet@mauth": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "mauth": {
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  }
+}

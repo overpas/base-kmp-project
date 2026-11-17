@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Template</string>
+
+    <!-- Hello -->
+    <string name="hello_title">Hello</string>
+    <string name="hello_name_field_label">Your name</string>
+    <string name="hello_greet_button_label">Greet</string>
+
+    <!-- Greeting -->
+    <string name="greeting_message">Hello, %1$s!</string>
+    <string name="greeting_back_button_label">Back</string>
+</resources>
