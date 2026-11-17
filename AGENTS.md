@@ -93,7 +93,7 @@ The e2e scripts share one device lock across all worktrees, so a second run wait
 one ends. Close the emulator/simulator before running the other platform e2e tests because of RAM
 constraints.
 
-### Scripts and hooks
+### L6: Scripts and hooks
 
 Run when `scripts/` or `.claude/hooks/` change; they guard the verification tooling itself.
 
